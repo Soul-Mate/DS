@@ -13,28 +13,32 @@ void InitLinkedList(LinkedList * L) {
 
 void HeadInsertLinkedList(LinkedList *L, DataType data) {
     LinkedList p;
-    p = malloc(sizeof(Node *));
+    p = malloc(sizeof(LinkedNode *));
     p->data = (char *)malloc(strlen(data));
     strcpy(p->data, data);
+    if ((*L) == NULL) {
+        p->next = (*L);
+        (*L) = p;
+        (*L)->rear = (*L);
+        return;
+    }
     p->next = (*L);
     (*L) = p;
 }
 
 void TailInsertLinkedList(LinkedList *L, DataType data) {
     LinkedList p;
-    p = malloc(sizeof(Node *));
+    p = malloc(sizeof(LinkedNode *));
     p->data = (char *)malloc(strlen(data));
     strcpy(p->data, data);
-    if (*L == NULL) {
+    if ((*L) == NULL) {
         (*L) = p;
+        (*L)->rear = (*L);
         return;
     }
+    (*L)->rear->next = p;
+    (*L)->rear = p;
 
-    LinkedList q;
-    q = *L;
-    while (q->next != NULL)
-        q = q->next;
-    q->next = p;
 }
 
 DataType GetLinkedListNode(LinkedList *L, int i) {
@@ -42,7 +46,6 @@ DataType GetLinkedListNode(LinkedList *L, int i) {
     LinkedList q;
     j = 0;
     q = *L;
-
     while(q != NULL && j < i) {
         q = q->next;
         j++;
@@ -71,8 +74,9 @@ DataType DelLinkedListNode(LinkedList *L, int position) {
 }
 
 void TraverseLinkedList(LinkedList *L) {
-    while((*L) != NULL) {
-        printf("%s\n", (*L)->data);
-        (*L) = (*L)->next;
+    LinkedList head = (*L);
+    while(head != NULL) {
+        printf("%s\n", head->data);
+        head = head->next;
     }
 }

@@ -8,8 +8,10 @@ typedef char * DataType ;
 typedef struct Node{
     DataType data;
     struct Node *next;
-}Node;
-typedef Node *LinkedList;
+    struct Node *rear;
+}LinkedNode;
+
+typedef LinkedNode *LinkedList;
 
 // init linked list
 void InitLinkedList(LinkedList *);
