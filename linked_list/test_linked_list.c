@@ -8,13 +8,13 @@
 int main(int argc, const char *argv[]) {
     LinkedList L;
     InitLinkedList(&L);
-    TailInsertLinkedList(&L, "4");
-    TailInsertLinkedList(&L, "5");
+    HeadInsertLinkedList(&L, "4");
+    HeadInsertLinkedList(&L, "5");
+    HeadInsertLinkedList(&L, "6");
     TailInsertLinkedList(&L, "6");
-    HeadInsertLinkedList(&L, "7");
-    HeadInsertLinkedList(&L, "8");
-    // TailInsertLinkedList(&L, "5");
-    // TailInsertLinkedList(&L, "6");
+    DelLinkedListNode(&L, 1);
+//    printf("delete %d index value: return %s\n",0, DelLinkedListNode(&L, 0));
+//    printf("delete %d index value: return %s\n",5, DelLinkedListNode(&L, 5));
     TraverseLinkedList(&L);
 }
 

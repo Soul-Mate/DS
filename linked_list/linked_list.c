@@ -16,14 +16,9 @@ void HeadInsertLinkedList(LinkedList *L, DataType data) {
     p = malloc(sizeof(LinkedNode *));
     p->data = (char *)malloc(strlen(data));
     strcpy(p->data, data);
-    if ((*L) == NULL) {
-        p->next = (*L);
-        (*L) = p;
-        (*L)->rear = (*L);
-        return;
-    }
     p->next = (*L);
     (*L) = p;
+    (*L)->rear = (*L);
 }
 
 void TailInsertLinkedList(LinkedList *L, DataType data) {
@@ -41,36 +36,58 @@ void TailInsertLinkedList(LinkedList *L, DataType data) {
 
 }
 
-DataType GetLinkedListNode(LinkedList *L, int i) {
+DataType GetLinkedListNode(LinkedList *L, int position) {
     int j;
-    LinkedList q;
+    LinkedList head;
     j = 0;
-    q = *L;
-    while(q != NULL && j < i) {
-        q = q->next;
+    head = *L;
+    while(head != NULL && j < position) {
+        head = head->next;
         j++;
     }
-    if (q == NULL)
+    if (head == NULL || j > position) {
         return "";
-    return q->data;
+    }
+    return head->data;
 }
 
 DataType DelLinkedListNode(LinkedList *L, int position) {
-    int j;
-    LinkedList q, p;
-    j = 0;
-    q = *L;
-    while (q->next != NULL && j < position) {
-        j++;
-        q = q->next;
-    }
-    if (q->next == NULL || j > position) {
+    LinkedList head, q;
+    DataType r;
+    if (*L == NULL) {
         return "";
     }
-    p = q->next;
-    q->next = p->next;
+    if (position == 0) {
+        q = *L;
+        *L = (*L)->next;
+        r = malloc(strlen(q->data));
+        strcpy(q->data,r);
+        free(q);
+        return r;
+    }
+
+    int j;
+    j = 0;
+
+    head = *L;
+    while (head != NULL && j < position - 1) {
+        head = head->next;
+        j++;
+    }
+    if (head == NULL || j > position - 1) {
+        return "";
+    }
+
+    if (head->next == NULL) {
+        return "";
+    }
+
+    q = head->next;
+    head->next = head->next->next;
+    r = malloc(strlen(q->data));
+    strcpy(q->data,r);
     free(q);
-    return p->data;
+    return r;
 }
 
 void TraverseLinkedList(LinkedList *L) {
