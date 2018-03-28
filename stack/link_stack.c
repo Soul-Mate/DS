@@ -7,35 +7,31 @@
 #include "link_stack.h"
 
 void InitStack(Stack **s) {
-    *s = (Stack *)malloc(sizeof(struct Stack));
-    (*s)->top = malloc(sizeof(struct StackNode));
-    (*s)->top->next = NULL;
+    (*s) = malloc(sizeof(Stack));
+    (*s)->top = NULL;
 }
 
-void Push(Stack ** s, DataType v) {
-    StackNode *p;
-    p = malloc(sizeof(StackNode));
+void Push(Stack **s, DataType v) {
+    StackNode *p = malloc(sizeof(StackNode));
     p->data = malloc(strlen(v));
     strcpy(p->data, v);
     p->next = (*s)->top;
     (*s)->top = p;
-
 }
 
-DataType Pop(Stack ** s) {
-    StackNode *node;
-    DataType r;
-    if ((*s)->top != NULL) {
-        node = (*s)->top;
-        (*s)->top = (*s)->top->next;
-        r = malloc(strlen(node->data));
-        strcpy(r, node->data);
-        free(node);
-        return r;
-    }
-    return "";
+DataType Pop(Stack **s) {
+    StackNode *p;
+    if (IsEmpty(s))
+        return  NULL;
+
+    p = (*s)->top;
+    (*s)->top = (*s)->top->next;
+    DataType r = malloc(strlen(p->data));
+    strcpy(r, p->data);
+    free(p);
+    return r;
 }
 
 int IsEmpty(Stack **s) {
-    return ((*s)->top == NULL);
+    return (*s)->top == NULL;
 }

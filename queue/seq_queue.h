@@ -10,11 +10,19 @@ typedef char * DataType;
 
 typedef struct Queue{
     DataType data[QUEUE_LEN];
-    int head, rear;
+    int front, rear;
 }Queue;
+
+void InitQueue(Queue **);
 
 void Push(Queue **, DataType);
 
 DataType Pop(Queue **);
+
+DataType GetFront(Queue **);
+
+int IsFull(Queue **q);
+
+int IsEmpty(Queue **q);
 
 #endif //DS_SEQ_QUEUE_H

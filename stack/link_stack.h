@@ -22,5 +22,6 @@ void Push(Stack **, DataType);
 
 DataType Pop(Stack **);
 
+int IsEmpty(Stack **);
 
 #endif //DS_LINK_STACK_H

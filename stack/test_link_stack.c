@@ -11,10 +11,7 @@ int main(int argc, const char *argv[]) {
     Push(&s, "a");
     Push(&s, "b");
     Push(&s, "c");
-    printf("%s\n",Pop(&s));
-    printf("%s\n",Pop(&s));
-    printf("%s\n",Pop(&s));
-    printf("%s\n",Pop(&s));
-    printf("%s\n",Pop(&s));
-    printf("%s\n",Pop(&s));
+    while (!IsEmpty(&s)) {
+        printf("%s\t",Pop(&s));
+    }
 }
