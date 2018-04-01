@@ -1,18 +1,17 @@
 SET(LIBRARY_OUTPUT_PATH  ${PROJECT_BINARY_DIR}/libs)
 
-INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/stack)
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/tree)
 
+ADD_LIBRARY(array_btree SHARED ${PROJECT_SOURCE_DIR}/tree/array_btree.c ${PROJECT_SOURCE_DIR}/tree/stack.c)
 
-ADD_LIBRARY(stack SHARED ${PROJECT_SOURCE_DIR}/tree/stack.c)
+ADD_EXECUTABLE(test_array_btree test_array_btree.c)
 
-ADD_LIBRARY(link_tree SHARED ${PROJECT_SOURCE_DIR}/tree/link_tree.c ${PROJECT_SOURCE_DIR}/tree/stack.c)
+TARGET_LINK_LIBRARIES(test_array_btree array_btree)
 
-ADD_EXECUTABLE(test_link_tree test_link_tree.c)
+ADD_LIBRARY(link_btree SHARED ${PROJECT_SOURCE_DIR}/tree/link_btree.c ${PROJECT_SOURCE_DIR}/tree/queue.c)
 
-ADD_EXECUTABLE(test_stack test_stack.c)
+ADD_EXECUTABLE(test_link_btree test_link_btree.c)
 
-TARGET_LINK_LIBRARIES(test_stack stack)
-
-TARGET_LINK_LIBRARIES(test_link_tree link_tree)
+TARGET_LINK_LIBRARIES(test_link_btree link_btree)
 
 

@@ -9,26 +9,28 @@ void InitStack(Stack **s) {
     (*s)->top = NULL;
 }
 
-void Push(Stack **s, StackData *data) {
+void Push(Stack **s, Element *el) {
     StackNode *p;
     p = malloc(sizeof(StackNode));
-    p->data = malloc(sizeof(StackData));
-    p->data->t = data->t;
-    p->data->index = data->index;
+    p->element = el;
     p->next = (*s)->top;
     (*s)->top = p;
 }
 
-StackData * Pop(Stack **s) {
+Element * Pop(Stack **s) {
     if (IsEmpty(s))
         return NULL;
     StackNode *p;
-    StackData *data;
+    Element * el;
     p = (*s)->top;
-    data = p->data;
+    el = p->element;
     (*s)->top = (*s)->top->next;
     free(p);
-    return data;
+    return el;
+}
+
+Element * GetTop(Stack **s) {
+    return (*s)->top->element;
 }
 
 int IsEmpty(Stack **s) {

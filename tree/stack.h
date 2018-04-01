@@ -7,13 +7,11 @@
 
 #include "link_tree.h"
 
-typedef struct StackData {
-    Tree *t;
-    int index;
-}StackData;
+
+typedef void * Element;
 
 typedef struct StackNode {
-    StackData *data;
+    Element *element;
     struct StackNode *next;
 }StackNode;
 
@@ -23,10 +21,11 @@ typedef struct Stack {
 
 void InitStack(Stack **);
 
-void Push(Stack **, StackData *);
+void Push(Stack **, Element *);
 
-StackData * Pop(Stack **);
+Element * Pop(Stack **);
 
 int IsEmpty(Stack **);
 
+Element * GetTop(Stack **s);
 #endif //DS_STACK_H
