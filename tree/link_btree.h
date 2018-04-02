@@ -16,7 +16,7 @@ struct TreeNode {
     BinTree Left, Right;
 };
 
-struct QueueType {
+struct QueueStorageTree {
     BinTree tree;
     int position;
 };

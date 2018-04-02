@@ -19,54 +19,80 @@ BinTree CreateBTreeRecursion(DataType el[], int index, int len)
 // create binary tree use queue
 BinTree CreateBTree(DataType el[], int len)
 {
-    int position;
-    int i;
+    int i, position;
     Queue *q;
-    struct QueueType qt;
-    InitQueue(&q);
-    // en queue root
-    BinTree root = malloc(sizeof(struct TreeNode));
+    BinTree root;
+    struct QueueStorageTree *qst;
+
     i = 0;
-    root->data = el[i];
+    position = 0;
+    // init queue
+    InitQueue(&q);
+
+    // create root
+    root = malloc(sizeof(struct TreeNode));
+    root->data = el[position];
     root->Left = NULL;
     root->Right = NULL;
-    qt.tree = root;
-    qt.position = i;
-    EnQueue(&q, (void *)&qt);
+
+    // en root queue
+    qst = malloc(sizeof(struct QueueStorageTree));
+    qst->tree = root;
+    qst->position = position;
+    EnQueue(&q, (void *)qst);
+
     while (!IsEmpty(&q)) {
-        // get tree
-        BinTree t;
-        struct QueueType *tmp;
-        tmp = (struct QueueType *)DeQueue(&q);
-        t = tmp->tree;
-        position = tmp->position;
+        BinTree cur;
+        struct QueueStorageTree *qst1;
+        qst1 = (struct QueueStorageTree *)DeQueue(&q);
+        cur = qst1->tree;
+        position = qst1->position;
+        free(qst1);
 
         // en queue right
-        if (i * 2 + 2 < len) {
-            struct QueueType qt2;
-            BinTree rtree = malloc(sizeof(struct TreeNode));
+        if (position * 2 + 2 < len) {
+            BinTree rtree;
+            struct QueueStorageTree *rqst;
+            rtree = malloc(sizeof(struct TreeNode));
+
+            // create right tree
             rtree->Left = NULL;
             rtree->Right = NULL;
-            rtree->data = el[i * 2 + 2];
-            t->Right = rtree;
-            qt2.tree = t->Right;
-            qt2.position = i;
-            EnQueue(&q, (void *)&qt2);
+            rtree->data = el[position * 2 + 2];
+
+            // set cur tree right tree
+            cur->Right = rtree;
+
+            // en left tree queue
+            rqst = malloc(sizeof(struct QueueStorageTree));
+            rqst->tree = rtree;
+            rqst->position = position * 2 + 2;
+            EnQueue(&q, (void *)rqst);
         }
+
         // en queue left
-        if (i * 2 + 1 < len) {
-            struct QueueType qt1;
-            BinTree ltree = malloc(sizeof(struct TreeNode));
-            ltree->data = el[i * 2 + 1];
+        if (position * 2 + 1 < len) {
+            BinTree ltree;
+            struct QueueStorageTree *lqst;
+            ltree = malloc(sizeof(struct TreeNode));
+
+            // create right tree
             ltree->Left = NULL;
             ltree->Right = NULL;
-            t->Left = ltree;
-            qt1.tree = t->Left;
-            qt1.position = i;
-            EnQueue(&q, (void *)&qt1);
+            ltree->data = el[position * 2 + 1];
+
+            // set cur tree right tree
+            cur->Left = ltree;
+
+            // en left tree queue
+            lqst = malloc(sizeof(struct QueueStorageTree));
+            lqst->tree = ltree;
+            lqst->position = position * 2 + 1;
+            EnQueue(&q, (void *)lqst);
         }
         i++;
     }
+    free(qst);
     return root;
 }
 
