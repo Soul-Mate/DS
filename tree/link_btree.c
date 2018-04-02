@@ -92,7 +92,6 @@ BinTree CreateBTree(DataType el[], int len)
         }
         i++;
     }
-    free(qst);
     return root;
 }
 
