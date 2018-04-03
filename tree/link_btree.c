@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "queue.h"
+#include "stack.h"
 #include "link_btree.h"
 
 // recursion create binary tree
@@ -101,5 +102,28 @@ void PreOrderTraversalRecursion(BinTree t)
         printf("%d\n", (int)t->data);
         PreOrderTraversalRecursion(t->Left);
         PreOrderTraversalRecursion(t->Right);
+    }
+}
+
+void PreOrderTraversal(BinTree root)
+{
+    Stack *stack;
+    InitStack(&stack);
+
+    // push root
+    Push(&stack, (Element *) root);
+    while (!StackIsEmpty(&stack)) {
+        // traversal left tree
+
+        while(root!=NULL) {
+            printf("%d\n", (int) root->data);
+            Push(&stack, (Element *) root);
+            root = root->Left;
+        }
+
+        if (!StackIsEmpty(&stack)) {
+            root = (BinTree)Pop(&stack);
+            root = root->Right;
+        }
     }
 }

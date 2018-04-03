@@ -5,8 +5,6 @@
 #ifndef DS_STACK_H
 #define DS_STACK_H
 
-#include "link_tree.h"
-
 
 typedef void * Element;
 
@@ -25,7 +23,7 @@ void Push(Stack **, Element *);
 
 Element * Pop(Stack **);
 
-int IsEmpty(Stack **);
+int StackIsEmpty(Stack **);
 
 Element * GetTop(Stack **s);
 #endif //DS_STACK_H

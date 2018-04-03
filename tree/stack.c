@@ -18,7 +18,7 @@ void Push(Stack **s, Element *el) {
 }
 
 Element * Pop(Stack **s) {
-    if (IsEmpty(s))
+    if (StackIsEmpty(s))
         return NULL;
     StackNode *p;
     Element * el;
@@ -33,6 +33,6 @@ Element * GetTop(Stack **s) {
     return (*s)->top->element;
 }
 
-int IsEmpty(Stack **s) {
+int StackIsEmpty(Stack **s) {
     return (*s)->top == NULL;
 }

@@ -8,7 +8,8 @@ ADD_EXECUTABLE(test_array_btree test_array_btree.c)
 
 TARGET_LINK_LIBRARIES(test_array_btree array_btree)
 
-ADD_LIBRARY(link_btree SHARED ${PROJECT_SOURCE_DIR}/tree/link_btree.c ${PROJECT_SOURCE_DIR}/tree/queue.c)
+ADD_LIBRARY(link_btree SHARED ${PROJECT_SOURCE_DIR}/tree/link_btree.c ${PROJECT_SOURCE_DIR}/tree/queue.c
+        ${PROJECT_SOURCE_DIR}/tree/stack.c)
 
 ADD_EXECUTABLE(test_link_btree test_link_btree.c)
 

@@ -9,5 +9,5 @@
 int main(int argc, const char *argv[]) {
     DataType arr[] = {1,2,3,4,5,6,7,8};
     BinTree  t = CreateBTree(arr,  8);
-    PreOrderTraversalRecursion(t);
+    PreOrderTraversal(t);
 }

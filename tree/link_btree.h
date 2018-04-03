@@ -25,6 +25,8 @@ BinTree CreateBTreeRecursion(DataType el[], int index, int len);
 
 BinTree CreateBTree(DataType el[], int len);
 
+void PreOrderTraversal(BinTree);
+
 void PreOrderTraversalRecursion(BinTree);
 //
 //void InOrderTraversalRecursion(BTree *);
